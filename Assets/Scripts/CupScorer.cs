@@ -118,6 +118,20 @@ public class CupScorer : MonoBehaviour
         InitialGuideLines();
     }
 
+    public float ScoreCup()
+    {
+        float inaccuracy = 0;       // Represents how different the expected cup is from the actual
+
+        List<float> cupScores = cup.GetAllToppingAmounts();
+
+        for(int i = 0; i < cupScores.Count; i++)
+        {
+            inaccuracy += Mathf.Abs(order.ingredients[i] - cupScores[i]);
+        }
+
+        return inaccuracy;
+    }
+
     /// <summary>
     /// Sets the y-value of guideline id by summing the current amount of an ingredient + sum of previous ingredients, then converting value into a local position.
     /// </summary>

@@ -13,15 +13,28 @@ public class CupFill : MonoBehaviour
 
     private void Start()
     {
+        ResetCupIngredients();
+    }
+
+    /// <summary>
+    /// Resets all cup ingredients to 0% and empties the cup.
+    /// </summary>
+    public void ResetCupIngredients()
+    {
         Vector3 startLvl = new Vector3(0, minLevel, 0);
 
-        foreach(SpriteRenderer sr in toppings)      // Setup toppings
+        foreach (SpriteRenderer sr in toppings)      // Setup toppings
         {
             sr.transform.localPosition = startLvl;
             sr.enabled = false;
         }
     }
 
+    /// <summary>
+    /// Adds amount to the topping specified by id. Will raise all other toppings above topping id by that amount.
+    /// </summary>
+    /// <param name="id">int id of topping to increment.</param>
+    /// <param name="amount">float amount of topping to be added.</param>
     public void IncrementTopping(int id, float amount)
     {
         if(id < toppings.Length)        // Make sure topping exists
@@ -87,6 +100,7 @@ public class CupFill : MonoBehaviour
 
     /// <summary>
     /// Gets the amount of topping + amount of previous total topping before layer inside drink on a scale of 0 - 1.
+    /// Essentially returns the height of the topping, converted to a percent of cup filled.
     /// </summary>
     /// <param name="id">int id of the topping.</param>
     /// <returns></returns>
